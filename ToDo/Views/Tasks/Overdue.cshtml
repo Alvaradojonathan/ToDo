@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ToDo.Models.Task>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table col-md-6">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskDescription)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.TaskDate < DateTime.Now && item.IsDone == false)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Toggle" , new { id=item.TaskID })">
+                        @if (item.IsDone)
+                        {
+                            <span class="glyphicon glyphicon-check"></span>
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-unchecked"></span>
+                        }
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskDescription)
+                </td>
+            </tr>
+        }
+    }
+</table>
